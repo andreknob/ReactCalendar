@@ -8,7 +8,7 @@ import {
 import { Container, Cell } from "./styles";
 
 function Calendar() {
-  const { currentDate, displayDates } = useSelector(selectCalendar);
+  const { currentDate, displayDates, numRows } = useSelector(selectCalendar);
   const dispatch = useDispatch();
 
   console.log("currentDate");
@@ -17,12 +17,10 @@ function Calendar() {
   console.log(displayDates);
 
   return (
-    <Container>
-      {Array(30)
-        .fill(0)
-        .map((item, index) => (
-          <Cell>{index}</Cell>
-        ))}
+    <Container numRows={numRows}>
+      {displayDates.map((item, index) => (
+        <Cell>{index}</Cell>
+      ))}
     </Container>
   );
 }
