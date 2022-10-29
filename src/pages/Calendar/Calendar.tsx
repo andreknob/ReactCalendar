@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 
+import DayCell from "../../components/DayCell";
 import {
   increment,
   decrement,
   selectCalendar,
 } from "../../store/slices/calendarSlice";
-import { Container, Cell } from "./styles";
+import { Container } from "./styles";
 
 function Calendar() {
   const { currentDate, displayDates, numRows } = useSelector(selectCalendar);
@@ -18,8 +19,8 @@ function Calendar() {
 
   return (
     <Container numRows={numRows}>
-      {displayDates.map((item, index) => (
-        <Cell>{index}</Cell>
+      {displayDates.map((date) => (
+        <DayCell key={date.toDateString()} date={date} />
       ))}
     </Container>
   );

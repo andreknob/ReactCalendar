@@ -13,9 +13,5 @@ export const Container = styled.section<IContainerProps>((props) => ({
     .map(() => "1fr")
     .join(" "),
 
-  gridGap: "4px",
+  gridGap: "1px",
 }));
-
-export const Cell = styled.div({
-  backgroundColor: "#7159c1",
-});
