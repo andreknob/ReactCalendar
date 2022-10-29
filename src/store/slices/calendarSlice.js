@@ -1,7 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { getNumOfDaysInMonth } from "../../utils/date";
+
+const currentDate = new Date();
+
 const initialState = {
   count: 0,
+  currentDate,
+  numOfDaysInMonth: getNumOfDaysInMonth(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1
+  ),
 };
 
 export const calendarSlice = createSlice({

@@ -6,20 +6,20 @@ import {
   decrement,
   selectCalendar,
 } from "../../store/slices/calendarSlice";
+import { Container, Cell } from "./styles";
 
 function Calendar(props) {
-  const { count } = useSelector(selectCalendar);
+  const { currentDate, numOfDaysInMonth } = useSelector(selectCalendar);
   const dispatch = useDispatch();
 
   return (
-    <div className="container">
-      <h1>Calendar</h1>
-      <p>{count}</p>
-      <div>
-        <button onClick={() => dispatch(increment())}>+</button>
-        <button onClick={() => dispatch(decrement())}>-</button>
-      </div>
-    </div>
+    <Container>
+      {Array(30)
+        .fill(0)
+        .map((item, index) => (
+          <Cell>{index}</Cell>
+        ))}
+    </Container>
   );
 }
 

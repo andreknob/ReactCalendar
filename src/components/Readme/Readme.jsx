@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 
 import Counter from "../Counter";
+import { Container } from "./styles";
 
 const README_PATH =
   "https://raw.githubusercontent.com/Jobsity/ReactChallenge/main/README.md";
@@ -24,7 +25,7 @@ The component below has a suite of tests to that could serve as guidance to unit
   }, []);
 
   return (
-    <div className="readme">
+    <Container>
       <ReactMarkdown allowDangerousHtml children={md} />
       {md && (
         <>
@@ -33,7 +34,7 @@ The component below has a suite of tests to that could serve as guidance to unit
           <Link to="/calendar">Go to Calendar page</Link>
         </>
       )}
-    </div>
+    </Container>
   );
 }
 
