@@ -1,10 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { increment, decrement } from "../store/slices/calendarSlice";
+import {
+  increment,
+  decrement,
+  selectCalendar,
+} from "../store/slices/calendarSlice";
 
 function Calendar(props) {
-  const count = useSelector((state) => state.calendar.count);
+  const { count } = useSelector(selectCalendar);
   const dispatch = useDispatch();
 
   return (

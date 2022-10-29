@@ -19,4 +19,6 @@ export const calendarSlice = createSlice({
 
 export const { increment, decrement } = calendarSlice.actions;
 
+export const selectCalendar = (state) => state.calendar;
+
 export default calendarSlice.reducer;
