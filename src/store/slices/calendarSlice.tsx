@@ -13,6 +13,8 @@ const initialState = {
   ),
 };
 
+type TCalendarState = typeof initialState;
+
 export const calendarSlice = createSlice({
   name: "Calendar",
   initialState,
@@ -28,6 +30,7 @@ export const calendarSlice = createSlice({
 
 export const { increment, decrement } = calendarSlice.actions;
 
-export const selectCalendar = (state) => state.calendar;
+export const selectCalendar = (state: { calendar: TCalendarState }) =>
+  state.calendar;
 
 export default calendarSlice.reducer;

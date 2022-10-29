@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "../pages/App";
@@ -7,8 +8,8 @@ function routes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<App />} />
-        <Route exact path="/calendar" element={<Calendar />} />
+        <Route path="/" element={<App />} />
+        <Route path="/calendar" element={<Calendar />} />
       </Routes>
     </BrowserRouter>
   );

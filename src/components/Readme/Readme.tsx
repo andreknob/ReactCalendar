@@ -15,6 +15,7 @@ function Readme() {
     fetch(README_PATH, { mode: "cors" })
       .then((response) => response.text())
       .then((response) => {
+        // @ts-ignore
         setMd(`${response}
         
 ## About Unit Tests:
@@ -26,6 +27,7 @@ The component below has a suite of tests to that could serve as guidance to unit
 
   return (
     <Container>
+      {/*@ts-ignore*/}
       <ReactMarkdown allowDangerousHtml children={md} />
       {md && (
         <>

@@ -8,7 +8,7 @@ import {
 } from "../../store/slices/calendarSlice";
 import { Container, Cell } from "./styles";
 
-function Calendar(props) {
+function Calendar() {
   const { currentDate, numOfDaysInMonth } = useSelector(selectCalendar);
   const dispatch = useDispatch();
 
