@@ -8,8 +8,13 @@ import {
 import { Container, Cell } from "./styles";
 
 function Calendar() {
-  const { currentDate, numOfDaysInMonth } = useSelector(selectCalendar);
+  const { currentDate, displayDates } = useSelector(selectCalendar);
   const dispatch = useDispatch();
+
+  console.log("currentDate");
+  console.log(currentDate);
+  console.log("displayDates");
+  console.log(displayDates);
 
   return (
     <Container>

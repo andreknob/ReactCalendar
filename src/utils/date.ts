@@ -1,3 +1,59 @@
-export function getNumOfDaysInMonth(year: number, month: number) {
-  return new Date(year, month, 0).getDate();
+function getFirstDateOfMonth(baseDate: Date) {
+  return new Date(baseDate.getFullYear(), baseDate.getMonth(), 1);
+}
+
+function getLastDateOfMonth(baseDate: Date) {
+  return new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, 0);
+}
+
+function getNumOfDaysInMonth(baseDate: Date) {
+  return getLastDateOfMonth(baseDate).getDate();
+}
+
+function getDatesToFillFirstWeek(baseDate: Date) {
+  const firstWeekDayOfMonth = getFirstDateOfMonth(baseDate).getDay();
+
+  const previousMonthDate = new Date(
+    baseDate.getFullYear(),
+    baseDate.getMonth() - 1
+  );
+
+  const previousMonthDays = new Array(getNumOfDaysInMonth(previousMonthDate))
+    .fill(null)
+    .map((item, index) => index + 1);
+
+  return previousMonthDays
+    .slice(previousMonthDays.length - firstWeekDayOfMonth)
+    .map(
+      (day) => new Date(baseDate.getFullYear(), baseDate.getMonth() - 1, day)
+    );
+}
+
+function getFullMonthFromBaseDate(baseDate: Date) {
+  const numOfDaysInMonth = getNumOfDaysInMonth(baseDate);
+  const baseYear = baseDate.getFullYear();
+  const baseMonth = baseDate.getMonth();
+
+  return new Array(numOfDaysInMonth)
+    .fill(null)
+    .map((item, index) => new Date(baseYear, baseMonth, index + 1));
+}
+
+function getDatesToFillLastWeek(baseDate: Date) {
+  const lastWeekDayOfMonth = getLastDateOfMonth(baseDate).getDay();
+
+  return new Array(6 - lastWeekDayOfMonth)
+    .fill(null)
+    .map(
+      (item, index) =>
+        new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, index + 1)
+    );
+}
+
+export function getCalendarDates(baseDate: Date) {
+  return [
+    ...getDatesToFillFirstWeek(baseDate),
+    ...getFullMonthFromBaseDate(baseDate),
+    ...getDatesToFillLastWeek(baseDate),
+  ];
 }

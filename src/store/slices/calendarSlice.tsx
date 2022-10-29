@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getNumOfDaysInMonth } from "../../utils/date";
+import { getCalendarDates } from "../../utils/date";
 
-const currentDate = new Date();
+const initialCurrentDate = new Date();
+
+const initialDisplayDates = getCalendarDates(initialCurrentDate);
 
 const initialState = {
   count: 0,
-  currentDate,
-  numOfDaysInMonth: getNumOfDaysInMonth(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 1
-  ),
+  currentDate: initialCurrentDate,
+  displayDates: initialDisplayDates,
+  numRows: initialDisplayDates.length / 7,
 };
 
 type TCalendarState = typeof initialState;
