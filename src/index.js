@@ -3,16 +3,15 @@ import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
 
 import Main from "./Main";
-import reducers from "./reducers";
 import reportWebVitals from "./reportWebVitals";
-import getStore from "./store/getStore";
+import { store } from "./store";
 
 // import main sass file
 import "./sass/app.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReduxProvider store={getStore(reducers)}>
+    <ReduxProvider store={store}>
       <Main />
     </ReduxProvider>
   </React.StrictMode>,
