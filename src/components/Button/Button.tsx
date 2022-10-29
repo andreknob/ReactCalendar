@@ -1,5 +1,3 @@
-import React from "react";
-
 import { IButtonProps } from "./interfaces";
 
 function Button(props: IButtonProps) {
