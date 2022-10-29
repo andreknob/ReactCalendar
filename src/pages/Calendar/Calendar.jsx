@@ -5,7 +5,7 @@ import {
   increment,
   decrement,
   selectCalendar,
-} from "../store/slices/calendarSlice";
+} from "../../store/slices/calendarSlice";
 
 function Calendar(props) {
   const { count } = useSelector(selectCalendar);
