@@ -9,7 +9,7 @@ const useBackgroundColor = (date: Date) => {
 
   useEffect(() => {
     if (date.getDay() === 0 || date.getDay() === 6) {
-      return setBackgroundColor("#e2e2e2");
+      return setBackgroundColor("#eaeaea");
     }
 
     setBackgroundColor("white");

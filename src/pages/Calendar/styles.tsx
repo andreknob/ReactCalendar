@@ -8,10 +8,12 @@ export const Container = styled.section<IContainerProps>((props) => ({
 
   display: "grid",
   gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr",
-  gridTemplateRows: new Array(props.numRows)
-    .fill(null)
-    .map(() => "1fr")
-    .join(" "),
+  gridTemplateRows:
+    "1fr " +
+    new Array(props.numRows)
+      .fill(null)
+      .map(() => "6fr")
+      .join(" "),
 
   gridGap: "1px",
 }));

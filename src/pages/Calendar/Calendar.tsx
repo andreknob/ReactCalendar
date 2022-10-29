@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import DayCell from "../../components/DayCell";
+import WeekDaysHeader from "../../components/WeekDays/WeekDays";
 import {
   increment,
   decrement,
@@ -19,6 +20,7 @@ function Calendar() {
 
   return (
     <Container numRows={numRows}>
+      <WeekDaysHeader />
       {displayDates.map((date) => (
         <DayCell key={date.toDateString()} date={date} />
       ))}
