@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useMemo, useState } from "react";
 
-import { selectCalendar } from "../../../store/slices/calendarSlice";
+const WEEK_DAY_COLOR = "white";
+const WEEKEND_DAY_COLOR = "#eaeaea";
 
 const useBackgroundColor = (date: Date) => {
-  const [backgroundColor, setBackgroundColor] = useState("#a199e1");
-  const { selectedMonthDate } = useSelector(selectCalendar);
+  const initialColor = useMemo(
+    () => (date.getDay() % 6 === 0 ? WEEKEND_DAY_COLOR : WEEK_DAY_COLOR),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
-  useEffect(() => {
-    if (date.getDay() === 0 || date.getDay() === 6) {
-      return setBackgroundColor("#eaeaea");
-    }
-
-    setBackgroundColor("white");
-  }, [date, selectedMonthDate, setBackgroundColor]);
+  const [backgroundColor] = useState(initialColor);
 
   return backgroundColor;
 };

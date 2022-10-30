@@ -1,17 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getCalendarDates } from "../../utils/date";
-
 const today = new Date();
 
-const initialDisplayDates = getCalendarDates(today);
-
 const initialState = {
-  count: 0,
-  selectedMonthDate: new Date(today.getFullYear(), new Date().getMonth()),
-  today,
-  displayDates: initialDisplayDates,
-  numRows: initialDisplayDates.length / 7,
+  selectedMonthDate: new Date(today.getFullYear(), today.getMonth()).toJSON(),
+  today: today.toJSON(),
 };
 
 type TCalendarState = typeof initialState;
@@ -20,18 +13,67 @@ export const calendarSlice = createSlice({
   name: "Calendar",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.count += 1;
+    decreaseMonth: (state) => {
+      const currentSelected = new Date(state.selectedMonthDate);
+      const nextSelected = new Date(
+        currentSelected.getFullYear(),
+        currentSelected.getMonth() - 1
+      );
+
+      return {
+        today: state.today,
+        selectedMonthDate: nextSelected.toJSON(),
+      };
     },
-    decrement: (state) => {
-      state.count -= 1;
+    increaseMonth: (state) => {
+      const currentSelected = new Date(state.selectedMonthDate);
+      const nextSelected = new Date(
+        currentSelected.getFullYear(),
+        currentSelected.getMonth() + 1
+      );
+
+      return {
+        today: state.today,
+        selectedMonthDate: nextSelected.toJSON(),
+      };
+    },
+    decreaseYear: (state) => {
+      const currentSelected = new Date(state.selectedMonthDate);
+      const nextSelected = new Date(
+        currentSelected.getFullYear() - 1,
+        currentSelected.getMonth()
+      );
+
+      return {
+        today: state.today,
+        selectedMonthDate: nextSelected.toJSON(),
+      };
+    },
+    increaseYear: (state) => {
+      const currentSelected = new Date(state.selectedMonthDate);
+      const nextSelected = new Date(
+        currentSelected.getFullYear() + 1,
+        currentSelected.getMonth()
+      );
+
+      return {
+        today: state.today,
+        selectedMonthDate: nextSelected.toJSON(),
+      };
     },
   },
 });
 
-export const { increment, decrement } = calendarSlice.actions;
+export const { decreaseMonth, increaseMonth, decreaseYear, increaseYear } =
+  calendarSlice.actions;
 
-export const selectCalendar = (state: { calendar: TCalendarState }) =>
-  state.calendar;
+export const selectCalendar = (state: { calendar: TCalendarState }) => {
+  const { selectedMonthDate, today } = state.calendar;
+
+  return {
+    selectedMonthDate: new Date(selectedMonthDate),
+    today: new Date(today),
+  };
+};
 
 export default calendarSlice.reducer;

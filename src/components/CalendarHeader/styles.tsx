@@ -14,7 +14,12 @@ export const Container = styled.div({
 
 export const RoundedButton = (props: IButtonProps) => {
   return (
-    <Button {...props} borderRadius="50%" padding="4px 16px" showBorder={false}>
+    <Button
+      {...props}
+      borderRadius="50%"
+      padding="12px 16px"
+      showBorder={false}
+    >
       {props.children}
     </Button>
   );
