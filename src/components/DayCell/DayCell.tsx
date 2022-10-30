@@ -4,7 +4,7 @@ import useBackgroundColor from "./hooks/useBackgroundColor";
 import { IDayCellProps } from "./interfaces";
 import { Cell } from "./styles";
 
-function DayCell({ date }: IDayCellProps) {
+const DayCell = ({ date }: IDayCellProps) => {
   // const { selectedMonthDate } = useSelector(selectCalendar);
   const backgroundColor = useBackgroundColor(date);
 
@@ -13,6 +13,6 @@ function DayCell({ date }: IDayCellProps) {
       <Day date={date} />
     </Cell>
   );
-}
+};
 
 export default DayCell;
