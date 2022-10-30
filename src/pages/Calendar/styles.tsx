@@ -4,16 +4,11 @@ import { IContainerProps } from "./interfaces";
 
 export const Container = styled.section<IContainerProps>((props) => ({
   height: "100vh",
-  backgroundColor: "black",
+  backgroundColor: "#cacaca",
 
   display: "grid",
-  gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr",
-  gridTemplateRows:
-    "1fr " +
-    new Array(props.numRows)
-      .fill(null)
-      .map(() => "6fr")
-      .join(" "),
+  gridTemplateColumns: "repeat(7, 1fr)",
+  gridTemplateRows: `1fr repeat(${props.numRows}, 6fr)`,
 
   gridGap: "1px",
 }));

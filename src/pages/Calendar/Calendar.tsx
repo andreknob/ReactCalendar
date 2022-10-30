@@ -10,11 +10,12 @@ import {
 import { Container } from "./styles";
 
 function Calendar() {
-  const { currentDate, displayDates, numRows } = useSelector(selectCalendar);
+  const { selectedMonthDate, displayDates, numRows } =
+    useSelector(selectCalendar);
   const dispatch = useDispatch();
 
-  console.log("currentDate");
-  console.log(currentDate);
+  console.log("selectedMonthDate");
+  console.log(selectedMonthDate);
   console.log("displayDates");
   console.log(displayDates);
 

@@ -2,13 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { getCalendarDates } from "../../utils/date";
 
-const initialCurrentDate = new Date();
+const today = new Date();
 
-const initialDisplayDates = getCalendarDates(initialCurrentDate);
+const initialDisplayDates = getCalendarDates(today);
 
 const initialState = {
   count: 0,
-  currentDate: initialCurrentDate,
+  selectedMonthDate: new Date(today.getFullYear(), new Date().getMonth()),
+  today,
   displayDates: initialDisplayDates,
   numRows: initialDisplayDates.length / 7,
 };

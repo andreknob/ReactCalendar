@@ -5,10 +5,10 @@ import { selectCalendar } from "../../../store/slices/calendarSlice";
 
 const useDayColor = (date: Date) => {
   const [dayColor, setDayColor] = useState("white");
-  const { currentDate } = useSelector(selectCalendar);
+  const { selectedMonthDate } = useSelector(selectCalendar);
 
   useEffect(() => {
-    if (date.getMonth() !== currentDate.getMonth()) {
+    if (date.getMonth() !== selectedMonthDate.getMonth()) {
       return setDayColor("gray");
     }
 
@@ -17,7 +17,7 @@ const useDayColor = (date: Date) => {
     }
 
     setDayColor("black");
-  }, [date, currentDate, setDayColor]);
+  }, [date, selectedMonthDate, setDayColor]);
 
   return dayColor;
 };

@@ -1,16 +1,16 @@
-function getFirstDateOfMonth(baseDate: Date) {
+const getFirstDateOfMonth = (baseDate: Date) => {
   return new Date(baseDate.getFullYear(), baseDate.getMonth(), 1);
-}
+};
 
-function getLastDateOfMonth(baseDate: Date) {
+const getLastDateOfMonth = (baseDate: Date) => {
   return new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, 0);
-}
+};
 
-function getNumOfDaysInMonth(baseDate: Date) {
+const getNumOfDaysInMonth = (baseDate: Date) => {
   return getLastDateOfMonth(baseDate).getDate();
-}
+};
 
-function getDatesToFillFirstWeek(baseDate: Date) {
+const getDatesToFillFirstWeek = (baseDate: Date) => {
   const firstWeekDayOfMonth = getFirstDateOfMonth(baseDate).getDay();
 
   const previousMonthDate = new Date(
@@ -27,9 +27,9 @@ function getDatesToFillFirstWeek(baseDate: Date) {
     .map(
       (day) => new Date(baseDate.getFullYear(), baseDate.getMonth() - 1, day)
     );
-}
+};
 
-function getFullMonthFromBaseDate(baseDate: Date) {
+const getFullMonthFromBaseDate = (baseDate: Date) => {
   const numOfDaysInMonth = getNumOfDaysInMonth(baseDate);
   const baseYear = baseDate.getFullYear();
   const baseMonth = baseDate.getMonth();
@@ -37,9 +37,9 @@ function getFullMonthFromBaseDate(baseDate: Date) {
   return new Array(numOfDaysInMonth)
     .fill(null)
     .map((item, index) => new Date(baseYear, baseMonth, index + 1));
-}
+};
 
-function getDatesToFillLastWeek(baseDate: Date) {
+const getDatesToFillLastWeek = (baseDate: Date) => {
   const lastWeekDayOfMonth = getLastDateOfMonth(baseDate).getDay();
 
   return new Array(6 - lastWeekDayOfMonth)
@@ -48,12 +48,16 @@ function getDatesToFillLastWeek(baseDate: Date) {
       (item, index) =>
         new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, index + 1)
     );
-}
+};
 
-export function getCalendarDates(baseDate: Date) {
+export const getCalendarDates = (baseDate: Date) => {
   return [
     ...getDatesToFillFirstWeek(baseDate),
     ...getFullMonthFromBaseDate(baseDate),
     ...getDatesToFillLastWeek(baseDate),
   ];
-}
+};
+
+export const compareCalendarDates = (firstDate: Date, secondDate: Date) => {
+  return firstDate.toDateString() === secondDate.toDateString();
+};

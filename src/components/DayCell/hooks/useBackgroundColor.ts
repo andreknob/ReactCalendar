@@ -5,7 +5,7 @@ import { selectCalendar } from "../../../store/slices/calendarSlice";
 
 const useBackgroundColor = (date: Date) => {
   const [backgroundColor, setBackgroundColor] = useState("#a199e1");
-  const { currentDate } = useSelector(selectCalendar);
+  const { selectedMonthDate } = useSelector(selectCalendar);
 
   useEffect(() => {
     if (date.getDay() === 0 || date.getDay() === 6) {
@@ -13,7 +13,7 @@ const useBackgroundColor = (date: Date) => {
     }
 
     setBackgroundColor("white");
-  }, [date, currentDate, setBackgroundColor]);
+  }, [date, selectedMonthDate, setBackgroundColor]);
 
   return backgroundColor;
 };

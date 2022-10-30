@@ -3,6 +3,5 @@ export interface IDayCellProps {
 }
 
 export interface TCellProps {
-  dayColor: string;
   backgroundColor: string;
 }
