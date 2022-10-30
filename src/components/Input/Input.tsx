@@ -2,7 +2,7 @@ import React from "react";
 
 import { COLORS } from "../../constants";
 import { IInputProps } from "./interfaces";
-import { Label } from "./styles";
+import { Label, Input as StyledInput } from "./styles";
 
 const Input: React.FC<IInputProps> = ({
   name,
@@ -14,11 +14,12 @@ const Input: React.FC<IInputProps> = ({
   icon,
 }) => {
   return (
-    <Label htmlFor={name} color={color} icon={icon}>
+    <Label htmlFor={name} icon={icon}>
       <>
-        <input
+        <StyledInput
           name={name}
           type={type}
+          color={color}
           aria-label={name}
           value={value}
           placeholder={placeholder}
