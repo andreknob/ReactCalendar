@@ -5,21 +5,19 @@ const today = new Date();
 const initialState = {
   selectedMonthDate: new Date(today.getFullYear(), today.getMonth()).toJSON(),
   today: today.toJSON(),
+  isModalOpen: false,
 };
 
 type TCalendarState = typeof initialState;
 
-const getStateForNextDate = (
+const setStateForNextDate = (
   state: TCalendarState,
   nextYear: number,
   nextMonth: number
 ) => {
   const nextSelected = new Date(nextYear, nextMonth);
 
-  return {
-    today: state.today,
-    selectedMonthDate: nextSelected.toJSON(),
-  };
+  state.selectedMonthDate = nextSelected.toJSON();
 };
 
 export const calendarSlice = createSlice({
@@ -29,12 +27,12 @@ export const calendarSlice = createSlice({
     setToToday: (state) => {
       const today = new Date(state.today);
 
-      return getStateForNextDate(state, today.getFullYear(), today.getMonth());
+      setStateForNextDate(state, today.getFullYear(), today.getMonth());
     },
     decreaseMonth: (state) => {
       const currentSelected = new Date(state.selectedMonthDate);
 
-      return getStateForNextDate(
+      setStateForNextDate(
         state,
         currentSelected.getFullYear(),
         currentSelected.getMonth() - 1
@@ -43,7 +41,7 @@ export const calendarSlice = createSlice({
     increaseMonth: (state) => {
       const currentSelected = new Date(state.selectedMonthDate);
 
-      return getStateForNextDate(
+      setStateForNextDate(
         state,
         currentSelected.getFullYear(),
         currentSelected.getMonth() + 1
@@ -52,7 +50,7 @@ export const calendarSlice = createSlice({
     decreaseYear: (state) => {
       const currentSelected = new Date(state.selectedMonthDate);
 
-      return getStateForNextDate(
+      setStateForNextDate(
         state,
         currentSelected.getFullYear() - 1,
         currentSelected.getMonth()
@@ -61,11 +59,17 @@ export const calendarSlice = createSlice({
     increaseYear: (state) => {
       const currentSelected = new Date(state.selectedMonthDate);
 
-      return getStateForNextDate(
+      setStateForNextDate(
         state,
         currentSelected.getFullYear() + 1,
         currentSelected.getMonth()
       );
+    },
+    openModal: (state) => {
+      state.isModalOpen = true;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
     },
   },
 });
@@ -76,12 +80,15 @@ export const {
   increaseMonth,
   decreaseYear,
   increaseYear,
+  openModal,
+  closeModal,
 } = calendarSlice.actions;
 
 export const selectCalendar = (state: { calendar: TCalendarState }) => {
   const { selectedMonthDate, today } = state.calendar;
 
   return {
+    ...state.calendar,
     selectedMonthDate: new Date(selectedMonthDate),
     today: new Date(today),
   };
