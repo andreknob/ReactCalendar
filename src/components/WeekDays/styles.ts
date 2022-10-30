@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
+import { COLORS } from "../../constants";
+
 export const WeekDayCell = styled.div<{ index: number }>((props) => ({
-  color: "darkblue",
+  color: COLORS.PURPLE,
   backgroundColor: "white",
   display: "flex",
   justifyContent: "center",

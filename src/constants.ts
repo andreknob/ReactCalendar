@@ -1,3 +1,7 @@
+export const COLORS = {
+  PURPLE: "#7660c0",
+};
+
 export const DAYS_OF_WEEK = [
   "Sunday",
   "Monday",

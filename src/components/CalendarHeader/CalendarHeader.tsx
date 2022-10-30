@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MONTHS } from "../../constants";
 import {
   selectCalendar,
+  setToToday,
   decreaseMonth,
   increaseMonth,
   decreaseYear,
@@ -17,14 +18,17 @@ const CalendarHeader = () => {
 
   return (
     <Container>
-      <Button color="black">Today</Button>
+      <Button color="black" onClick={() => dispatch(setToToday())}>
+        Today
+      </Button>
       <RoundedButton
-        margin="0 0 0 64px"
+        title="Previous month"
         onClick={() => dispatch(decreaseMonth())}
       >
         {"<"}
       </RoundedButton>
       <RoundedButton
+        title="Next month"
         margin="0 8px 0 0"
         onClick={() => dispatch(increaseMonth())}
       >
@@ -35,12 +39,13 @@ const CalendarHeader = () => {
         {selectedMonthDate.getFullYear()}
       </h1>
       <RoundedButton
+        title="Previous year"
         margin="0 0 0 8px"
         onClick={() => dispatch(decreaseYear())}
       >
         {"<"}
       </RoundedButton>
-      <RoundedButton onClick={() => dispatch(increaseYear())}>
+      <RoundedButton title="Next year" onClick={() => dispatch(increaseYear())}>
         {">"}
       </RoundedButton>
     </Container>

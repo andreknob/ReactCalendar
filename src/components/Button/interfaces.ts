@@ -1,4 +1,5 @@
 export interface IButtonProps {
+  title?: string;
   backgroundColor?: string;
   color?: string;
   padding?: string;
