@@ -7,6 +7,8 @@ import { Label, Input as StyledInput } from "./styles";
 const Input: React.FC<IInputProps> = ({
   name,
   type = "text",
+  width = "400px",
+  padding = "16px",
   color = COLORS.PURPLE,
   value,
   setValue,
@@ -14,11 +16,14 @@ const Input: React.FC<IInputProps> = ({
   icon,
 }) => {
   return (
-    <Label htmlFor={name} icon={icon}>
+    <Label htmlFor={name}>
       <>
         <StyledInput
           name={name}
           type={type}
+          width={width}
+          padding={padding}
+          icon={icon}
           color={color}
           aria-label={name}
           value={value}

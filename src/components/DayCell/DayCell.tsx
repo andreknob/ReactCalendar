@@ -13,7 +13,7 @@ const DayCell = ({ date }: IDayCellProps) => {
   return (
     <Cell
       backgroundColor={backgroundColor}
-      onClick={() => dispatch(openModal())}
+      onClick={() => dispatch(openModal(date.toJSON()))}
     >
       <Day date={date} />
     </Cell>

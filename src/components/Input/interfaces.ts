@@ -1,6 +1,8 @@
 export interface IInputProps {
   name: string;
   value: string;
+  width?: string;
+  padding?: string;
   setValue: (text: string) => void;
   type?: string;
   color?: string;
@@ -8,6 +10,9 @@ export interface IInputProps {
   icon?: React.ReactNode | React.Component;
 }
 
-export interface IInputLabelProps {
+export interface IStyledInputProps {
+  width?: string;
+  padding?: string;
+  color?: string;
   icon?: React.ReactNode | React.Component;
 }

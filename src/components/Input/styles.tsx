@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
-import { IInputLabelProps } from "./interfaces";
+import { IStyledInputProps } from "./interfaces";
 
-export const Label = styled.label<IInputLabelProps>`
+export const Label = styled.label`
   display: flex;
   position: relative;
   margin-bottom: 2rem;
 `;
 
-export const Input = styled.input<IInputLabelProps>`
+export const Input = styled.input<IStyledInputProps>`
   border: 1px solid #25242c;
-  width: 400px;
+  width: ${(props) => props.width};
   border-radius: 4px;
-  padding: 16px;
+  padding: ${(props) => props.padding};
   padding-left: ${(props) => (props.icon ? "40px" : "16px")};
   font-size: 16px;
   transition: 180ms ease-in-out;
