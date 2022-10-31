@@ -61,3 +61,7 @@ export const getCalendarDates = (baseDate: Date) => {
 export const compareCalendarDates = (firstDate: Date, secondDate: Date) => {
   return firstDate.toDateString() === secondDate.toDateString();
 };
+
+export const sliceYearMonthDay = (date: string) => {
+  return date.match(/^[2-9]\d{3}-\d{2}-\d{2}/)?.[0];
+};
