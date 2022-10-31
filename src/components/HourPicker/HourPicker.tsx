@@ -15,7 +15,7 @@ const HourPicker = ({
   onStartTimeChange,
   onEndTimeChange,
 }: IHourPickerProps) => {
-  const { dateInReminderModal } = useSelector(selectCalendar);
+  const { reminderModal } = useSelector(selectCalendar);
 
   useEffect(() => {
     const baseHour = (new Date().getHours() + 1) % 24;
@@ -32,13 +32,13 @@ const HourPicker = ({
     );
   }, [onStartTimeChange, onEndTimeChange]);
 
-  if (!dateInReminderModal) {
+  if (!reminderModal.date) {
     return null;
   }
 
   return (
     <>
-      <h3>{format(new Date(dateInReminderModal), "PPPP")}</h3>
+      <h3>{format(new Date(reminderModal.date), "PPPP")}</h3>
       <Container>
         <Input
           name="start_time"

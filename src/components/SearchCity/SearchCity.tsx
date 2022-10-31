@@ -32,6 +32,12 @@ const SearchCity = ({
     }, 200);
   }, [searchTerm, selected]);
 
+  useEffect(() => {
+    if (selected) {
+      setSearchTerm(renderLocationName(selected));
+    }
+  }, [selected]);
+
   const renderLocationName = (item: ILocation) => {
     return `${item.cityName}, ${item.stateName}, ${item.countryName}`;
   };
@@ -39,7 +45,6 @@ const SearchCity = ({
   const handleSelectedChange = (item: ILocation) => {
     onSelectedChange(item);
 
-    setSearchTerm(renderLocationName(item));
     setSearchResults([]);
   };
 

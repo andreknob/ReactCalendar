@@ -21,7 +21,7 @@ const DayCell = ({ date }: IDayCellProps) => {
   return (
     <Cell
       backgroundColor={backgroundColor}
-      onClick={() => dispatch(openModal(date.toJSON()))}
+      onClick={() => dispatch(openModal({ date: date.toJSON() }))}
     >
       <Day date={date} />
       <Reminders reminders={reminders} />

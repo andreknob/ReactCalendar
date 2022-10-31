@@ -30,6 +30,15 @@ export const getRemindersFromStorage = (date: string) => {
   return reminders.filter((item: IReminder) => item.date === date);
 };
 
+export const getReminderFromStorage: (id: string) => IReminder | null = (
+  id: string
+) => {
+  const stringified = localStorage.getItem(REMINDERS);
+  const reminders = stringified ? JSON.parse(stringified) : [];
+
+  return reminders.filter((item: IReminder) => item.id === id)[0];
+};
+
 export const getCitiesKeysFromStorage = () => {
   const stringified = localStorage.getItem(REMINDERS);
   const reminders = stringified ? JSON.parse(stringified) : [];

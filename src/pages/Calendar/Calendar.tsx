@@ -9,7 +9,7 @@ import {
   selectCalendar,
 } from "../../store/slices/calendarSlice";
 import { getCalendarDates } from "../../utils/date";
-import { NewRemiderModal } from "./components/NewRemiderModal";
+import { RemiderModal } from "./components/RemiderModal";
 import { Container, CalendarGrid } from "./styles";
 
 function Calendar() {
@@ -42,7 +42,7 @@ function Calendar() {
         <WeekDaysHeader />
         {renderedDisplayDates}
       </CalendarGrid>
-      <NewRemiderModal />
+      <RemiderModal />
     </Container>
   );
 }

@@ -8,7 +8,10 @@ const today = new Date();
 const initialState = {
   selectedMonthDate: new Date(today.getFullYear(), today.getMonth()).toJSON(),
   today: today.toJSON(),
-  dateInReminderModal: "",
+  reminderModal: {
+    date: "",
+    editingId: "",
+  },
   citiesForecasts: [] as ICityForecast[],
 };
 
@@ -83,10 +86,12 @@ export const calendarSlice = createSlice({
       );
     },
     openModal: (state, action) => {
-      state.dateInReminderModal = action.payload as string;
+      state.reminderModal.date = action.payload.date as string;
+      state.reminderModal.editingId = action.payload.editingId ?? "";
     },
     closeModal: (state) => {
-      state.dateInReminderModal = "";
+      state.reminderModal.date = "";
+      state.reminderModal.editingId = "";
     },
   },
   extraReducers: (builder) => {

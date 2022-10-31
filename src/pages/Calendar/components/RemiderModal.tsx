@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { nanoid } from "@reduxjs/toolkit";
@@ -7,7 +7,10 @@ import HourPicker from "../../../components/HourPicker";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import SearchCity from "../../../components/SearchCity";
-import { saveReminderToStorage } from "../../../services/storageApi";
+import {
+  getReminderFromStorage,
+  saveReminderToStorage,
+} from "../../../services/storageApi";
 import { ILocation } from "../../../services/weatherApi";
 import {
   closeModal,
@@ -15,15 +18,33 @@ import {
 } from "../../../store/slices/calendarSlice";
 import { StyledButton } from "./styles";
 
-export const NewRemiderModal = () => {
+export const RemiderModal = () => {
   const [reminderName, setReminderName] = useState("");
   const [selectedLocation, setSelectedLocation] = useState<ILocation | null>(
     null
   );
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const { dateInReminderModal: date } = useSelector(selectCalendar);
+  const {
+    reminderModal: { date, editingId },
+  } = useSelector(selectCalendar);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!editingId) {
+      return;
+    }
+
+    const editingReminder = getReminderFromStorage(editingId);
+    if (!editingReminder) {
+      return;
+    }
+
+    setReminderName(editingReminder.reminderName);
+    setSelectedLocation(editingReminder.location);
+    setStartTime(editingReminder.startTime);
+    setEndTime(editingReminder.endTime);
+  }, [editingId]);
 
   const handleReminderNameChange = (value: string) => {
     setReminderName(value.substring(0, 30));
@@ -53,7 +74,7 @@ export const NewRemiderModal = () => {
     }
 
     const reminder = {
-      id: nanoid(12),
+      id: editingId || nanoid(12),
       reminderName,
       date: date,
       startTime,
@@ -68,8 +89,10 @@ export const NewRemiderModal = () => {
     dispatch(closeModal());
   };
 
+  const title = editingId ? "Edit reminder" : "Add new reminder";
+
   return (
-    <Modal title="Add new reminder" open={!!date}>
+    <Modal title={title} open={!!date || !!editingId}>
       <Input
         name="reminder_name"
         placeholder="Add a title"
