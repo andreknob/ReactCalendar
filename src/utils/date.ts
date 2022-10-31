@@ -65,3 +65,17 @@ export const compareCalendarDates = (firstDate: Date, secondDate: Date) => {
 export const sliceYearMonthDay = (date: string) => {
   return date.match(/^[2-9]\d{3}-\d{2}-\d{2}/)?.[0];
 };
+
+export const hourFormatConversor24hTo12h = (hour: number) => {
+  if (hour < 12) {
+    return {
+      format: "am",
+      hour,
+    };
+  }
+
+  return {
+    format: "pm",
+    hour: hour % 12,
+  };
+};

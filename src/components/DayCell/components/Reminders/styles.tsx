@@ -12,6 +12,8 @@ export const ReminderContainer = styled.div`
   cursor: pointer;
   padding: 8px 8px 8px 24px;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
 
   &:after {
     content: "";
@@ -37,4 +39,9 @@ export const Name = styled.span`
 
 export const Date = styled.span`
   color: gray;
+`;
+
+export const Forecast = styled.div`
+  color: ${COLORS.PURPLE};
+  font-size: 10px;
 `;

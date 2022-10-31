@@ -41,14 +41,14 @@ export const NewRemiderModal = () => {
     setSelectedLocation(selected);
   };
 
+  const validateForm = () => {
+    return (
+      reminderName && selectedLocation !== null && date && startTime && endTime
+    );
+  };
+
   const handleSave = () => {
-    if (
-      !reminderName ||
-      selectedLocation === null ||
-      !date ||
-      !startTime ||
-      !endTime
-    ) {
+    if (!validateForm()) {
       return;
     }
 
@@ -58,7 +58,7 @@ export const NewRemiderModal = () => {
       date: date,
       startTime,
       endTime,
-      location: selectedLocation,
+      location: selectedLocation as ILocation,
     };
 
     saveReminderToStorage(reminder);
