@@ -5,7 +5,7 @@ const today = new Date();
 const initialState = {
   selectedMonthDate: new Date(today.getFullYear(), today.getMonth()).toJSON(),
   today: today.toJSON(),
-  dateInReminderModal: null,
+  dateInReminderModal: "",
 };
 
 type TCalendarState = typeof initialState;
@@ -66,10 +66,10 @@ export const calendarSlice = createSlice({
       );
     },
     openModal: (state, action) => {
-      state.dateInReminderModal = action.payload;
+      state.dateInReminderModal = action.payload as string;
     },
     closeModal: (state) => {
-      state.dateInReminderModal = null;
+      state.dateInReminderModal = "";
     },
   },
 });

@@ -1,4 +1,5 @@
 export const COLORS = {
+  LIGHT_GRAY: "#f1f1f1",
   PURPLE: "#7660c0",
 };
 

@@ -22,7 +22,7 @@ export const NewRemiderModal = () => {
   );
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const { dateInReminderModal } = useSelector(selectCalendar);
+  const { dateInReminderModal: date } = useSelector(selectCalendar);
   const dispatch = useDispatch();
 
   const handleReminderNameChange = (value: string) => {
@@ -42,13 +42,20 @@ export const NewRemiderModal = () => {
   };
 
   const handleSave = () => {
-    if (selectedLocation === null) {
+    if (
+      !reminderName ||
+      selectedLocation === null ||
+      !date ||
+      !startTime ||
+      !endTime
+    ) {
       return;
     }
 
     const reminder = {
       id: nanoid(12),
       reminderName,
+      date: date,
       startTime,
       endTime,
       location: selectedLocation,
@@ -62,7 +69,7 @@ export const NewRemiderModal = () => {
   };
 
   return (
-    <Modal title="Add new reminder" open={!!dateInReminderModal}>
+    <Modal title="Add new reminder" open={!!date}>
       <Input
         name="reminder_name"
         placeholder="Add a title"

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { COLORS } from "../../constants";
+
 export const Container = styled.div({
   display: "flex",
   flexDirection: "column",
@@ -20,6 +22,6 @@ export const Result = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: #f1f1f1;
+    background-color: ${COLORS.LIGHT_GRAY};
   }
 `;

@@ -14,4 +14,6 @@ export const CurrentDayMarker = styled.div<{
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  alignSelf: "center",
+  fontWeight: "bold",
 }));
