@@ -1,26 +1,64 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { nanoid } from "@reduxjs/toolkit";
 
 import HourPicker from "../../../components/HourPicker";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import SearchCity from "../../../components/SearchCity";
-import { ISearchResult as ISearchCityResult } from "../../../services/weatherApi";
-import { selectCalendar } from "../../../store/slices/calendarSlice";
+import { saveReminderToStorage } from "../../../services/storageApi";
+import { ILocation } from "../../../services/weatherApi";
+import {
+  closeModal,
+  selectCalendar,
+} from "../../../store/slices/calendarSlice";
+import { StyledButton } from "./styles";
 
 export const NewRemiderModal = () => {
   const [reminderName, setReminderName] = useState("");
-  const [selectedCity, setSelectedCity] = useState<ISearchCityResult | null>(
+  const [selectedLocation, setSelectedLocation] = useState<ILocation | null>(
     null
   );
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const { dateInReminderModal } = useSelector(selectCalendar);
+  const dispatch = useDispatch();
 
   const handleReminderNameChange = (value: string) => {
     setReminderName(value.substring(0, 30));
   };
 
-  const handleSelectedCity = (selectedCity: ISearchCityResult) => {
-    setSelectedCity(selectedCity);
+  const handleStartTimeChange = useCallback((value: string) => {
+    setStartTime(value);
+  }, []);
+
+  const handleEndTimeChange = useCallback((value: string) => {
+    setEndTime(value);
+  }, []);
+
+  const handleSelectedLocation = (selected: ILocation) => {
+    setSelectedLocation(selected);
+  };
+
+  const handleSave = () => {
+    if (selectedLocation === null) {
+      return;
+    }
+
+    const reminder = {
+      id: nanoid(12),
+      reminderName,
+      startTime,
+      endTime,
+      location: selectedLocation,
+    };
+
+    saveReminderToStorage(reminder);
+
+    setReminderName("");
+
+    dispatch(closeModal());
   };
 
   return (
@@ -31,11 +69,17 @@ export const NewRemiderModal = () => {
         value={reminderName}
         setValue={handleReminderNameChange}
       />
-      <HourPicker />
-      <SearchCity
-        selected={selectedCity}
-        onSelectedChange={handleSelectedCity}
+      <HourPicker
+        startTime={startTime}
+        endTime={endTime}
+        onStartTimeChange={handleStartTimeChange}
+        onEndTimeChange={handleEndTimeChange}
       />
+      <SearchCity
+        selected={selectedLocation}
+        onSelectedChange={handleSelectedLocation}
+      />
+      <StyledButton onClick={handleSave}>Save</StyledButton>
     </Modal>
   );
 };

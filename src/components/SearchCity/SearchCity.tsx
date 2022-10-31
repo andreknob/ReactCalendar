@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-import { ISearchResult, searchCity } from "../../services/weatherApi";
+import { ILocation, searchCity } from "../../services/weatherApi";
 import Input from "../Input";
 import { Container, Results, Result } from "./styles";
 
@@ -8,11 +8,11 @@ const SearchCity = ({
   selected,
   onSelectedChange,
 }: {
-  selected: ISearchResult | null;
-  onSelectedChange: (selected: ISearchResult) => void;
+  selected: ILocation | null;
+  onSelectedChange: (selected: ILocation) => void;
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState<ISearchResult[] | []>([]);
+  const [searchResults, setSearchResults] = useState<ILocation[] | []>([]);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
 
   useEffect(() => {
@@ -32,11 +32,11 @@ const SearchCity = ({
     }, 200);
   }, [searchTerm, selected]);
 
-  const renderLocationName = (item: ISearchResult) => {
+  const renderLocationName = (item: ILocation) => {
     return `${item.cityName}, ${item.stateName}, ${item.countryName}`;
   };
 
-  const handleSelectedChange = (item: ISearchResult) => {
+  const handleSelectedChange = (item: ILocation) => {
     onSelectedChange(item);
 
     setSearchTerm(renderLocationName(item));

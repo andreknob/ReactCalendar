@@ -9,6 +9,7 @@ export const Label = styled.label`
 
 export const Input = styled.input<IStyledInputProps>`
   border: 1px solid #25242c;
+  flex: ${(props) => (props.width ? "0" : "1")};
   width: ${(props) => props.width};
   border-radius: 4px;
   padding: ${(props) => props.padding};

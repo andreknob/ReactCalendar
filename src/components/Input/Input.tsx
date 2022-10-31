@@ -7,7 +7,7 @@ import { Label, Input as StyledInput } from "./styles";
 const Input: React.FC<IInputProps> = ({
   name,
   type = "text",
-  width = "400px",
+  width,
   padding = "16px",
   color = COLORS.PURPLE,
   value,

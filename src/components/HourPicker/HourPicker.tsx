@@ -1,23 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { format } from "date-fns";
 
 import { selectCalendar } from "../../store/slices/calendarSlice";
 import Input from "../Input";
+import { IHourPickerProps } from "./interfaces";
 import { Container, Separator } from "./styles";
 
-const HourPicker = () => {
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+const HourPicker = ({
+  startTime,
+  endTime,
+  onStartTimeChange,
+  onEndTimeChange,
+}: IHourPickerProps) => {
   const { dateInReminderModal } = useSelector(selectCalendar);
 
   useEffect(() => {
     const baseHour = (new Date().getHours() + 1) % 24;
 
-    setStartTime(`${baseHour}:00`);
-    setEndTime(`${baseHour + 1}:00`);
-  }, []);
+    onStartTimeChange(`${baseHour}:00`);
+    onEndTimeChange(`${(baseHour + 1) % 24}:00`);
+  }, [onStartTimeChange, onEndTimeChange]);
 
   if (!dateInReminderModal) {
     return null;
@@ -32,7 +36,7 @@ const HourPicker = () => {
           width="75px"
           padding="8px"
           value={startTime}
-          setValue={setStartTime}
+          setValue={onStartTimeChange}
         />
         <Separator>-</Separator>
         <Input
@@ -40,7 +44,7 @@ const HourPicker = () => {
           width="75px"
           padding="8px"
           value={endTime}
-          setValue={setEndTime}
+          setValue={onEndTimeChange}
         />
       </Container>
     </>

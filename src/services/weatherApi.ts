@@ -7,16 +7,14 @@ const instance = axios.create({
   timeout: 2000,
 });
 
-export interface ISearchResult {
+export interface ILocation {
   cityKey: string;
   cityName: string;
   stateName: string;
   countryName: string;
 }
 
-export const searchCity = async (
-  searchTerm: string
-): Promise<ISearchResult[]> => {
+export const searchCity = async (searchTerm: string): Promise<ILocation[]> => {
   try {
     const result = await instance.get(
       `/search?q=${searchTerm}&apikey=${API_KEY}`
