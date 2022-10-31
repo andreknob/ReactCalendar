@@ -5,7 +5,6 @@ import { IStyledInputProps } from "./interfaces";
 export const Label = styled.label`
   display: flex;
   position: relative;
-  margin-bottom: 2rem;
 `;
 
 export const Input = styled.input<IStyledInputProps>`
