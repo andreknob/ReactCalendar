@@ -79,3 +79,23 @@ export const hourFormatConversor24hTo12h = (hour: number) => {
     hour: hour % 12,
   };
 };
+
+const DIGITS_IN_HOUR_REGEX = /(\d{1,2}):(\d{2}).{2}/;
+const getDigitsInHour = (startTime: string) => {
+  return Number(
+    startTime.replace(DIGITS_IN_HOUR_REGEX, (_, $1, $2) => `${$1}${$2}`)
+  );
+};
+
+export const compareStartTimes = (
+  firstStartTime: string,
+  secondStartTime: string
+) => {
+  if (firstStartTime.includes("am") && secondStartTime.includes("pm")) {
+    return -1;
+  } else if (firstStartTime.includes("pm") && secondStartTime.includes("am")) {
+    return 1;
+  }
+
+  return getDigitsInHour(firstStartTime) - getDigitsInHour(secondStartTime);
+};

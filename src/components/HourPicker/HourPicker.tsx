@@ -42,7 +42,7 @@ const HourPicker = ({
       <Container>
         <Input
           name="start_time"
-          width="85px"
+          width="90px"
           padding="8px"
           value={startTime}
           setValue={onStartTimeChange}
@@ -50,7 +50,7 @@ const HourPicker = ({
         <Separator>-</Separator>
         <Input
           name="end_time"
-          width="85px"
+          width="90px"
           padding="8px"
           value={endTime}
           setValue={onEndTimeChange}
