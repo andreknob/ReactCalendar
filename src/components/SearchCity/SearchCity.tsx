@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { MdSearch } from "react-icons/md";
 
 import { ILocation, searchCity } from "../../services/weatherApi";
 import Input from "../Input";
@@ -53,6 +54,7 @@ const SearchCity = ({
       <Input
         name="search_term"
         placeholder="Search for a city"
+        icon={<MdSearch />}
         value={searchTerm}
         setValue={setSearchTerm}
       />

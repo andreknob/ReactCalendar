@@ -6,6 +6,7 @@ export interface IInputProps {
   padding?: string;
   setValue: (text: string) => void;
   type?: string;
+  onBlur?: () => void;
   color?: string;
   placeholder?: string;
   icon?: React.ReactNode | React.Component;

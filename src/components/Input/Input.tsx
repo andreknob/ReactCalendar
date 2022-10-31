@@ -13,6 +13,7 @@ const Input: React.FC<IInputProps> = ({
   color = COLORS.PURPLE,
   value,
   setValue,
+  onBlur,
   placeholder,
   icon,
 }) => {
@@ -31,6 +32,7 @@ const Input: React.FC<IInputProps> = ({
           value={value}
           placeholder={placeholder}
           onChange={(e) => setValue(e.target.value)}
+          onBlur={onBlur}
         />
         {icon && icon}
       </>

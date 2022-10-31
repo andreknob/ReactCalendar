@@ -1,12 +1,14 @@
 import { useState, useCallback, useEffect } from "react";
+import { MdTextFields } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
 import { nanoid } from "@reduxjs/toolkit";
 
-import HourPicker from "../../../components/HourPicker";
+import DateInput from "../../../components/DateInput";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import SearchCity from "../../../components/SearchCity";
+import TimeInput from "../../../components/TimeInput";
 import {
   getReminderFromStorage,
   saveReminderToStorage,
@@ -96,11 +98,13 @@ export const RemiderModal = () => {
       <Input
         name="reminder_name"
         placeholder="Add a title"
+        icon={<MdTextFields />}
         margin="0 0 16px 0"
         value={reminderName}
         setValue={handleReminderNameChange}
       />
-      <HourPicker
+      <DateInput />
+      <TimeInput
         startTime={startTime}
         endTime={endTime}
         onStartTimeChange={handleStartTimeChange}

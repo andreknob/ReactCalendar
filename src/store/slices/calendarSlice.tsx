@@ -89,6 +89,9 @@ export const calendarSlice = createSlice({
       state.reminderModal.date = action.payload.date as string;
       state.reminderModal.editingId = action.payload.editingId ?? "";
     },
+    updateModalDate: (state, action) => {
+      state.reminderModal.date = action.payload as string;
+    },
     closeModal: (state) => {
       state.reminderModal.date = "";
       state.reminderModal.editingId = "";
@@ -108,6 +111,7 @@ export const {
   decreaseYear,
   increaseYear,
   openModal,
+  updateModalDate,
   closeModal,
 } = calendarSlice.actions;
 

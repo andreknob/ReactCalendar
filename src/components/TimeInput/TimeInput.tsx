@@ -1,22 +1,17 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { MdSchedule } from "react-icons/md";
 
-import { format } from "date-fns";
-
-import { selectCalendar } from "../../store/slices/calendarSlice";
 import { hourFormatConversor24hTo12h } from "../../utils/date";
 import Input from "../Input";
-import { IHourPickerProps } from "./interfaces";
+import { ITimeInputProps } from "./interfaces";
 import { Container, Separator } from "./styles";
 
-const HourPicker = ({
+const TimeInput = ({
   startTime,
   endTime,
   onStartTimeChange,
   onEndTimeChange,
-}: IHourPickerProps) => {
-  const { reminderModal } = useSelector(selectCalendar);
-
+}: ITimeInputProps) => {
   useEffect(() => {
     const baseHour = (new Date().getHours() + 1) % 24;
     const convertedStartTimeHour = hourFormatConversor24hTo12h(baseHour);
@@ -32,26 +27,21 @@ const HourPicker = ({
     );
   }, [onStartTimeChange, onEndTimeChange]);
 
-  if (!reminderModal.date) {
-    return null;
-  }
-
   return (
     <>
-      <h3>{format(new Date(reminderModal.date), "PPPP")}</h3>
       <Container>
         <Input
           name="start_time"
-          width="90px"
-          padding="8px"
+          icon={<MdSchedule />}
+          width="110px"
           value={startTime}
           setValue={onStartTimeChange}
         />
         <Separator>-</Separator>
         <Input
           name="end_time"
-          width="90px"
-          padding="8px"
+          icon={<MdSchedule />}
+          width="110px"
           value={endTime}
           setValue={onEndTimeChange}
         />
@@ -60,4 +50,4 @@ const HourPicker = ({
   );
 };
 
-export default HourPicker;
+export default TimeInput;

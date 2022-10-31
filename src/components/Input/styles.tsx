@@ -24,7 +24,7 @@ export const Input = styled.input<IStyledInputProps>`
     fill: rgba(0, 0, 0, 0.5);
     position: absolute;
     left: 12px;
-    top: 16px;
+    top: 14px;
     width: 24px;
     height: 24px;
     transition: 180ms ease-in-out;

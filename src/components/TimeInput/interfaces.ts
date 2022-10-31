@@ -1,4 +1,4 @@
-export interface IHourPickerProps {
+export interface ITimeInputProps {
   startTime: string;
   endTime: string;
   onStartTimeChange: (value: string) => void;
