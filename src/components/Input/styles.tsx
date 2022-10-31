@@ -12,6 +12,7 @@ export const Input = styled.input<IStyledInputProps>`
   flex: ${(props) => (props.width ? "0" : "1")};
   width: ${(props) => props.width};
   border-radius: 4px;
+  margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   padding-left: ${(props) => (props.icon ? "40px" : "16px")};
   font-size: 16px;

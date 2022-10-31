@@ -96,6 +96,7 @@ export const RemiderModal = () => {
       <Input
         name="reminder_name"
         placeholder="Add a title"
+        margin="0 0 16px 0"
         value={reminderName}
         setValue={handleReminderNameChange}
       />

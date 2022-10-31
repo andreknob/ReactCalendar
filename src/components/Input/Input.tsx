@@ -8,6 +8,7 @@ const Input: React.FC<IInputProps> = ({
   name,
   type = "text",
   width,
+  margin = "0",
   padding = "16px",
   color = COLORS.PURPLE,
   value,
@@ -22,6 +23,7 @@ const Input: React.FC<IInputProps> = ({
           name={name}
           type={type}
           width={width}
+          margin={margin}
           padding={padding}
           icon={icon}
           color={color}

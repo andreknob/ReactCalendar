@@ -2,6 +2,7 @@ export interface IInputProps {
   name: string;
   value: string;
   width?: string;
+  margin?: string;
   padding?: string;
   setValue: (text: string) => void;
   type?: string;
@@ -12,6 +13,7 @@ export interface IInputProps {
 
 export interface IStyledInputProps {
   width?: string;
+  margin?: string;
   padding?: string;
   color?: string;
   icon?: React.ReactNode | React.Component;
