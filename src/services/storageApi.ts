@@ -29,3 +29,18 @@ export const getRemindersFromStorage = (date: string) => {
 
   return reminders.filter((item: IReminder) => item.date === date);
 };
+
+export const getCitiesKeysFromStorage = () => {
+  const stringified = localStorage.getItem(REMINDERS);
+  const reminders = stringified ? JSON.parse(stringified) : [];
+
+  const keysCount = {};
+  return reminders
+    .map((item: IReminder) => item.location.cityKey)
+    .filter((cityKey: string) => {
+      const currentValue = keysCount[cityKey];
+      keysCount[cityKey] = currentValue ? currentValue + 1 : 1;
+
+      return keysCount[cityKey] === 1;
+    });
+};

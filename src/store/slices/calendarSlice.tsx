@@ -1,4 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { getCitiesKeysFromStorage } from "../../services/storageApi";
+import { getForecast, ICityForecast } from "../../services/weatherApi";
 
 const today = new Date();
 
@@ -6,6 +9,7 @@ const initialState = {
   selectedMonthDate: new Date(today.getFullYear(), today.getMonth()).toJSON(),
   today: today.toJSON(),
   dateInReminderModal: "",
+  citiesForecasts: [] as ICityForecast[],
 };
 
 type TCalendarState = typeof initialState;
@@ -19,6 +23,19 @@ const setStateForNextDate = (
 
   state.selectedMonthDate = nextSelected.toJSON();
 };
+
+export const fetchForecasts = createAsyncThunk(
+  "Calendar/fetchForecasts",
+  async () => {
+    const citiesKeys = getCitiesKeysFromStorage();
+
+    const promises = citiesKeys.map((cityKey: string) => getForecast(cityKey));
+
+    const result = await Promise.all(promises);
+
+    return result as ICityForecast[];
+  }
+);
 
 export const calendarSlice = createSlice({
   name: "Calendar",
@@ -71,6 +88,11 @@ export const calendarSlice = createSlice({
     closeModal: (state) => {
       state.dateInReminderModal = "";
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchForecasts.fulfilled, (state, action) => {
+      state.citiesForecasts = action.payload;
+    });
   },
 });
 
