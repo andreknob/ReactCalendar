@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 
-import { IReminder } from "../../../../services/storageApi";
-import { compareStartTimes } from "../../../../utils/date";
+import { IReminder } from "../../services/storageApi";
+import { compareStartTimes } from "../../utils/date";
 import { Reminder } from "./Reminder";
 import { RemindersContainer } from "./styles";
 
-export const Reminders = ({ reminders }: { reminders: IReminder[] }) => {
+export const Reminders = ({
+  reminders,
+  showAll = false,
+  onReminderClick,
+}: {
+  reminders: IReminder[];
+  showAll?: boolean;
+  onReminderClick?: () => void;
+}) => {
   const [sortedReminders, setSortedReminders] = useState<IReminder[]>([]);
 
   useEffect(() => {
@@ -22,8 +30,12 @@ export const Reminders = ({ reminders }: { reminders: IReminder[] }) => {
 
   return (
     <RemindersContainer>
-      {reminders.slice(0, 4).map((reminder) => (
-        <Reminder key={reminder.id} reminder={reminder} />
+      {reminders.slice(0, showAll ? reminders.length : 4).map((reminder) => (
+        <Reminder
+          key={reminder.id}
+          reminder={reminder}
+          onReminderClick={onReminderClick}
+        />
       ))}
     </RemindersContainer>
   );

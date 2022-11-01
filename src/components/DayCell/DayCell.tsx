@@ -1,29 +1,25 @@
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { getRemindersFromStorage, IReminder } from "../../services/storageApi";
-import { openModal } from "../../store/slices/calendarSlice";
+import useReminders from "../../hooks/useReminders";
+import { openReminderModal } from "../../store/slices/calendarSlice";
+import { Reminders } from "../Reminders/Reminders";
 import Day from "./components/Day/Day";
-import { Reminders } from "./components/Reminders/Reminders";
 import useBackgroundColor from "./hooks/useBackgroundColor";
 import { IDayCellProps } from "./interfaces";
 import { Cell } from "./styles";
 
 const DayCell = ({ date }: IDayCellProps) => {
-  const [reminders, setReminders] = useState<IReminder[]>([]);
   const backgroundColor = useBackgroundColor(date);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setReminders(getRemindersFromStorage(date.toJSON()));
-  }, [date]);
+  const reminders = useReminders(date.toJSON());
 
   return (
     <Cell
       backgroundColor={backgroundColor}
-      onClick={() => dispatch(openModal({ date: date.toJSON() }))}
+      onClick={() => dispatch(openReminderModal({ date: date.toJSON() }))}
     >
-      <Day date={date} />
+      <Day date={date} remindersLength={reminders.length} />
       <Reminders reminders={reminders} />
     </Cell>
   );

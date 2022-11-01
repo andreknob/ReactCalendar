@@ -1,3 +1,4 @@
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
 import { MONTHS } from "../../constants";
@@ -22,28 +23,28 @@ const CalendarHeader = () => {
         title="Previous month"
         onClick={() => dispatch(decreaseMonth())}
       >
-        {"<"}
+        <MdArrowBackIos />
       </RoundedButton>
       <RoundedButton
         title="Next month"
         margin="0 8px 0 0"
         onClick={() => dispatch(increaseMonth())}
       >
-        {">"}
+        <MdArrowForwardIos />
       </RoundedButton>
       <h1>
-        {MONTHS[selectedMonthDate.getMonth()]},{" "}
-        {selectedMonthDate.getFullYear()}
+        {MONTHS[new Date(selectedMonthDate).getMonth()]},{" "}
+        {new Date(selectedMonthDate).getFullYear()}
       </h1>
       <RoundedButton
         title="Previous year"
         margin="0 0 0 8px"
         onClick={() => dispatch(decreaseYear())}
       >
-        {"<"}
+        <MdArrowBackIos />
       </RoundedButton>
       <RoundedButton title="Next year" onClick={() => dispatch(increaseYear())}>
-        {">"}
+        <MdArrowForwardIos />
       </RoundedButton>
       <Button color="black" onClick={() => dispatch(setToToday())}>
         Today

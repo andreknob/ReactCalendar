@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { IoMdRainy, IoMdSunny, IoMdCloudy } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IReminder } from "../../../../services/storageApi";
+import { IReminder } from "../../services/storageApi";
 import {
-  openModal,
+  openReminderModal,
   selectCalendar,
-} from "../../../../store/slices/calendarSlice";
-import { sliceYearMonthDay } from "../../../../utils/date";
-import { getForecastForReminder } from "../../../../utils/weather";
+} from "../../store/slices/calendarSlice";
+import { sliceYearMonthDay } from "../../utils/date";
+import { getForecastForReminder } from "../../utils/weather";
 import { IDisplayForecast } from "./interfaces";
 import { Date, Forecast, Name, ReminderContainer, Title } from "./styles";
 
@@ -18,7 +18,13 @@ const WEATHER_ICONS = {
   rain: <IoMdRainy />,
 };
 
-export const Reminder = ({ reminder }: { reminder: IReminder }) => {
+export const Reminder = ({
+  reminder,
+  onReminderClick,
+}: {
+  reminder: IReminder;
+  onReminderClick?: () => void;
+}) => {
   const [forecast, setForecast] = useState<IDisplayForecast | null>(null);
   const { citiesForecasts } = useSelector(selectCalendar);
   const dispatch = useDispatch();
@@ -41,8 +47,10 @@ export const Reminder = ({ reminder }: { reminder: IReminder }) => {
   const handleContainerClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
 
+    onReminderClick?.();
+
     dispatch(
-      openModal({
+      openReminderModal({
         date: reminder.date,
         editingId: reminder.id,
       })

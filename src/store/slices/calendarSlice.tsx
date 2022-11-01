@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 
 import { getCitiesKeysFromStorage } from "../../services/storageApi";
 import { getForecast, ICityForecast } from "../../services/weatherApi";
@@ -8,9 +8,13 @@ const today = new Date();
 const initialState = {
   selectedMonthDate: new Date(today.getFullYear(), today.getMonth()).toJSON(),
   today: today.toJSON(),
+  remindersReference: nanoid(),
   reminderModal: {
     date: "",
     editingId: "",
+  },
+  remindersListModal: {
+    date: "",
   },
   citiesForecasts: [] as ICityForecast[],
 };
@@ -85,16 +89,26 @@ export const calendarSlice = createSlice({
         currentSelected.getMonth()
       );
     },
-    openModal: (state, action) => {
+    openReminderModal: (state, action) => {
       state.reminderModal.date = action.payload.date as string;
       state.reminderModal.editingId = action.payload.editingId ?? "";
     },
-    updateModalDate: (state, action) => {
+    updateReminderModalDate: (state, action) => {
       state.reminderModal.date = action.payload as string;
     },
-    closeModal: (state) => {
+    openRemindersListModal: (state, action) => {
+      state.remindersListModal.date = action.payload as string;
+    },
+    closeAllModals: (state) => {
       state.reminderModal.date = "";
       state.reminderModal.editingId = "";
+      state.remindersListModal.date = "";
+    },
+    closeRemindersListModal: (state) => {
+      state.remindersListModal.date = "";
+    },
+    updateRemindersReference: (state) => {
+      state.remindersReference = nanoid();
     },
   },
   extraReducers: (builder) => {
@@ -110,9 +124,12 @@ export const {
   increaseMonth,
   decreaseYear,
   increaseYear,
-  openModal,
-  updateModalDate,
-  closeModal,
+  openReminderModal,
+  updateReminderModalDate,
+  openRemindersListModal,
+  closeAllModals,
+  closeRemindersListModal,
+  updateRemindersReference,
 } = calendarSlice.actions;
 
 export const selectCalendar = (state: { calendar: TCalendarState }) => {
@@ -120,8 +137,8 @@ export const selectCalendar = (state: { calendar: TCalendarState }) => {
 
   return {
     ...state.calendar,
-    selectedMonthDate: new Date(selectedMonthDate),
-    today: new Date(today),
+    selectedMonthDate,
+    today,
   };
 };
 

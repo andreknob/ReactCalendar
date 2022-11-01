@@ -9,7 +9,7 @@ const useDayColor = (date: Date) => {
   const { selectedMonthDate } = useSelector(selectCalendar);
 
   useEffect(() => {
-    if (date.getMonth() !== selectedMonthDate.getMonth()) {
+    if (date.getMonth() !== new Date(selectedMonthDate).getMonth()) {
       return setDayColor("gray");
     }
 

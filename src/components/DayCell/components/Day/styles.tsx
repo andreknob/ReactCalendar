@@ -2,6 +2,24 @@ import styled from "styled-components";
 
 import { COLORS } from "../../../../constants";
 
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
+
+export const NewReminder = styled.span({
+  color: COLORS.PURPLE,
+  fontFize: "10px",
+  marginRight: "8px",
+  position: "absolute",
+  left: "12px",
+  cursor: "pointer",
+  opacity: "0",
+  transition: "opacity 0.2s ease-in-out",
+});
+
 export const CurrentDayMarker = styled.div<{
   isToday: boolean;
   dayColor: string;
@@ -14,6 +32,16 @@ export const CurrentDayMarker = styled.div<{
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  alignSelf: "center",
   fontWeight: "bold",
 }));
+
+export const SeeMoreReminders = styled.span({
+  color: COLORS.PURPLE,
+  fontFize: "10px",
+  marginRight: "8px",
+  position: "absolute",
+  right: "32px",
+  cursor: "pointer",
+  opacity: "0",
+  transition: "opacity 0.2s ease-in-out",
+});

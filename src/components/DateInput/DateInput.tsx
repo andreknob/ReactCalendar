@@ -6,7 +6,7 @@ import { format } from "date-fns";
 
 import {
   selectCalendar,
-  updateModalDate,
+  updateReminderModalDate,
 } from "../../store/slices/calendarSlice";
 import Input from "../Input";
 import { H3 } from "./styles";
@@ -30,7 +30,7 @@ const DateInput = () => {
     const [day, month, year] = displayDateInput.split("/");
 
     dispatch(
-      updateModalDate(
+      updateReminderModalDate(
         new Date(Number(year), Number(month) - 1, Number(day)).toJSON()
       )
     );

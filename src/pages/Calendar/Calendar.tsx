@@ -9,7 +9,8 @@ import {
   selectCalendar,
 } from "../../store/slices/calendarSlice";
 import { getCalendarDates } from "../../utils/date";
-import { RemiderModal } from "./components/RemiderModal";
+import { ReminderModal } from "./components/ReminderModal";
+import { RemindersListModal } from "./components/RemindersListModal";
 import { Container, CalendarGrid } from "./styles";
 
 function Calendar() {
@@ -19,7 +20,7 @@ function Calendar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const result = getCalendarDates(selectedMonthDate);
+    const result = getCalendarDates(new Date(selectedMonthDate));
 
     setDisplayDates(result);
     setNumRows(result.length / 7);
@@ -42,7 +43,8 @@ function Calendar() {
         <WeekDaysHeader />
         {renderedDisplayDates}
       </CalendarGrid>
-      <RemiderModal />
+      <ReminderModal />
+      <RemindersListModal />
     </Container>
   );
 }

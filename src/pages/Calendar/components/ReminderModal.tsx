@@ -15,12 +15,13 @@ import {
 } from "../../../services/storageApi";
 import { ILocation } from "../../../services/weatherApi";
 import {
-  closeModal,
+  closeAllModals,
   selectCalendar,
+  updateRemindersReference,
 } from "../../../store/slices/calendarSlice";
 import { StyledButton } from "./styles";
 
-export const RemiderModal = () => {
+export const ReminderModal = () => {
   const [reminderName, setReminderName] = useState("");
   const [selectedLocation, setSelectedLocation] = useState<ILocation | null>(
     null
@@ -88,7 +89,8 @@ export const RemiderModal = () => {
 
     setReminderName("");
 
-    dispatch(closeModal());
+    dispatch(closeAllModals());
+    dispatch(updateRemindersReference());
   };
 
   const title = editingId ? "Edit reminder" : "Add new reminder";

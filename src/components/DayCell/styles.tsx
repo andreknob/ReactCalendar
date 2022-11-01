@@ -7,4 +7,10 @@ export const Cell = styled.div<TCellProps>((props) => ({
   display: "flex",
   flexDirection: "column",
   padding: "0.5rem",
+
+  "&:hover": {
+    span: {
+      opacity: "1",
+    },
+  },
 }));
