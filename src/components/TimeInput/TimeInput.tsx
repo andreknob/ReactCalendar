@@ -33,7 +33,7 @@ const TimeInput = ({
         <Input
           name="start_time"
           icon={<MdSchedule />}
-          width="110px"
+          width="125px"
           value={startTime}
           setValue={onStartTimeChange}
         />
@@ -41,7 +41,7 @@ const TimeInput = ({
         <Input
           name="end_time"
           icon={<MdSchedule />}
-          width="110px"
+          width="125px"
           value={endTime}
           setValue={onEndTimeChange}
         />

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { IoMdRainy, IoMdSunny, IoMdCloudy } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IReminder } from "../../../../services/storageApi";
@@ -10,6 +11,12 @@ import { sliceYearMonthDay } from "../../../../utils/date";
 import { getForecastForReminder } from "../../../../utils/weather";
 import { IDisplayForecast } from "./interfaces";
 import { Date, Forecast, Name, ReminderContainer, Title } from "./styles";
+
+const WEATHER_ICONS = {
+  cloud: <IoMdCloudy />,
+  sun: <IoMdSunny />,
+  rain: <IoMdRainy />,
+};
 
 export const Reminder = ({ reminder }: { reminder: IReminder }) => {
   const [forecast, setForecast] = useState<IDisplayForecast | null>(null);
@@ -49,7 +56,13 @@ export const Reminder = ({ reminder }: { reminder: IReminder }) => {
         <span> </span>
         <Name>{reminder.reminderName}</Name>
       </Title>
-      {forecast ? <Forecast>{forecast.phrase}</Forecast> : null}
+      {forecast ? (
+        <Forecast>
+          {WEATHER_ICONS[forecast.icon]}
+          <span> </span>
+          {forecast.phrase}
+        </Forecast>
+      ) : null}
     </ReminderContainer>
   );
 };
