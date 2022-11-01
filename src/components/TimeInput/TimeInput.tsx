@@ -32,6 +32,7 @@ const TimeInput = ({
       <Container>
         <Input
           name="start_time"
+          placeholder="Start time"
           icon={<MdSchedule />}
           width="125px"
           value={startTime}
@@ -40,6 +41,7 @@ const TimeInput = ({
         <Separator>-</Separator>
         <Input
           name="end_time"
+          placeholder="End time"
           icon={<MdSchedule />}
           width="125px"
           value={endTime}

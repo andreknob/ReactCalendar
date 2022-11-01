@@ -52,7 +52,7 @@ const SearchCity = ({
   return (
     <Container>
       <Input
-        name="search_term"
+        name="search_city"
         placeholder="Search for a city"
         icon={<MdSearch />}
         value={searchTerm}
