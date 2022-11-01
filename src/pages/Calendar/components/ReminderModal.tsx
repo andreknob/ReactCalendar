@@ -20,6 +20,7 @@ import {
   selectCalendar,
   updateRemindersReference,
 } from "../../../store/slices/calendarSlice";
+import { DATE_REGEX, TIME_REGEX } from "../../../utils/regex";
 import { ErrorMessage, Footer, StyledButton } from "./styles";
 
 export const ReminderModal = () => {
@@ -29,6 +30,7 @@ export const ReminderModal = () => {
   );
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [hasError, setHasError] = useState(false);
   const {
     reminderModal: { date, editingId },
   } = useSelector(selectCalendar);
@@ -67,9 +69,23 @@ export const ReminderModal = () => {
   };
 
   const validateForm = () => {
-    return (
-      reminderName && selectedLocation !== null && date && startTime && endTime
-    );
+    let hasError: boolean =
+      reminderName.length === 0 || selectedLocation === null;
+
+    if (!hasError) {
+      const hasDateError = !DATE_REGEX.test(
+        new Date(date).toLocaleDateString("en-UK")
+      );
+
+      const hasStartTimeError = !TIME_REGEX.test(startTime);
+      const hasEndTimeError = !TIME_REGEX.test(endTime);
+
+      hasError = hasDateError || hasStartTimeError || hasEndTimeError;
+    }
+
+    setHasError(!!hasError);
+
+    return !hasError;
   };
 
   const handleSave = () => {
@@ -128,10 +144,12 @@ export const ReminderModal = () => {
         onSelectedChange={handleSelectedLocation}
       />
       <Footer>
-        <ErrorMessage>There are missing and/or invalid fields!</ErrorMessage>
-        {!!editingId ? (
+        {hasError && (
+          <ErrorMessage>There are missing and/or invalid fields!</ErrorMessage>
+        )}
+        {!!editingId && (
           <StyledButton onClick={handleDelete}>Delete</StyledButton>
-        ) : null}
+        )}
         <StyledButton onClick={handleSave}>Save</StyledButton>
       </Footer>
     </Modal>

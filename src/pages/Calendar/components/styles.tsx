@@ -4,7 +4,7 @@ import Button from "../../../components/Button";
 
 export const Footer = styled.div({
   display: "flex",
-  justifyContent: "space-between",
+  justifyContent: "end",
 });
 
 export const ErrorMessage = styled.span({
@@ -13,6 +13,6 @@ export const ErrorMessage = styled.span({
 });
 
 export const StyledButton = styled(Button)({
-  marginTop: "16px",
+  margin: "16px 0 0 8px",
   width: "100px",
 });

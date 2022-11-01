@@ -64,13 +64,13 @@ export const Reminder = ({
         <span> </span>
         <Name>{reminder.reminderName}</Name>
       </Title>
-      {forecast ? (
+      {forecast && (
         <Forecast>
           {WEATHER_ICONS[forecast.icon]}
           <span> </span>
           {forecast.phrase}
         </Forecast>
-      ) : null}
+      )}
     </ReminderContainer>
   );
 };

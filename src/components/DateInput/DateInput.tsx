@@ -8,6 +8,7 @@ import {
   selectCalendar,
   updateReminderModalDate,
 } from "../../store/slices/calendarSlice";
+import { DATE_REGEX } from "../../utils/regex";
 import Input from "../Input";
 import { H3 } from "./styles";
 
@@ -27,6 +28,13 @@ const DateInput = () => {
   };
 
   const handleDateInputBlur = () => {
+    const hasDateError = !DATE_REGEX.test(displayDateInput);
+    if (hasDateError) {
+      return setDisplayDateInput(
+        new Date(reminderModal.date).toLocaleDateString("en-UK")
+      );
+    }
+
     const [day, month, year] = displayDateInput.split("/");
 
     dispatch(

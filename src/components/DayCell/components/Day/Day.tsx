@@ -37,9 +37,9 @@ const Day: React.FC<{ date: Date; remindersLength: number }> = ({
       <CurrentDayMarker isToday={isToday} dayColor={dayColor}>
         {date.getDate()}
       </CurrentDayMarker>
-      {remindersLength > 4 ? (
+      {remindersLength > 4 && (
         <SeeMoreReminders onClick={handleSeeMore}>see more</SeeMoreReminders>
-      ) : null}
+      )}
     </Container>
   );
 };
