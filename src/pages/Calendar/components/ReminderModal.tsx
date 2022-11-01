@@ -10,6 +10,7 @@ import Modal from "../../../components/Modal";
 import SearchCity from "../../../components/SearchCity";
 import TimeInput from "../../../components/TimeInput";
 import {
+  deleteReminderFromStorage,
   getReminderFromStorage,
   saveReminderToStorage,
 } from "../../../services/storageApi";
@@ -19,7 +20,7 @@ import {
   selectCalendar,
   updateRemindersReference,
 } from "../../../store/slices/calendarSlice";
-import { StyledButton } from "./styles";
+import { ErrorMessage, Footer, StyledButton } from "./styles";
 
 export const ReminderModal = () => {
   const [reminderName, setReminderName] = useState("");
@@ -87,6 +88,16 @@ export const ReminderModal = () => {
 
     saveReminderToStorage(reminder);
 
+    finishAction();
+  };
+
+  const handleDelete = () => {
+    deleteReminderFromStorage(editingId);
+
+    finishAction();
+  };
+
+  const finishAction = () => {
     setReminderName("");
 
     dispatch(closeAllModals());
@@ -116,7 +127,13 @@ export const ReminderModal = () => {
         selected={selectedLocation}
         onSelectedChange={handleSelectedLocation}
       />
-      <StyledButton onClick={handleSave}>Save</StyledButton>
+      <Footer>
+        <ErrorMessage>There are missing and/or invalid fields!</ErrorMessage>
+        {!!editingId ? (
+          <StyledButton onClick={handleDelete}>Delete</StyledButton>
+        ) : null}
+        <StyledButton onClick={handleSave}>Save</StyledButton>
+      </Footer>
     </Modal>
   );
 };

@@ -11,9 +11,13 @@ export interface IReminder {
   location: ILocation;
 }
 
-export const saveReminderToStorage = (reminder: IReminder) => {
+const getParsedReminders = () => {
   const stringified = localStorage.getItem(REMINDERS);
-  const reminders = stringified ? JSON.parse(stringified) : [];
+  return stringified ? JSON.parse(stringified) : [];
+};
+
+export const saveReminderToStorage = (reminder: IReminder) => {
+  const reminders = getParsedReminders();
 
   const nextReminders = [
     ...reminders.filter((item: IReminder) => item.id !== reminder.id),
@@ -23,9 +27,18 @@ export const saveReminderToStorage = (reminder: IReminder) => {
   localStorage.setItem(REMINDERS, JSON.stringify(nextReminders));
 };
 
+export const deleteReminderFromStorage = (id: string) => {
+  const reminders = getParsedReminders();
+
+  const nextReminders = [
+    ...reminders.filter((item: IReminder) => item.id !== id),
+  ];
+
+  localStorage.setItem(REMINDERS, JSON.stringify(nextReminders));
+};
+
 export const getRemindersFromStorage = (date: string) => {
-  const stringified = localStorage.getItem(REMINDERS);
-  const reminders = stringified ? JSON.parse(stringified) : [];
+  const reminders = getParsedReminders();
 
   return reminders.filter((item: IReminder) => item.date === date);
 };
@@ -33,15 +46,13 @@ export const getRemindersFromStorage = (date: string) => {
 export const getReminderFromStorage: (id: string) => IReminder | null = (
   id: string
 ) => {
-  const stringified = localStorage.getItem(REMINDERS);
-  const reminders = stringified ? JSON.parse(stringified) : [];
+  const reminders = getParsedReminders();
 
   return reminders.filter((item: IReminder) => item.id === id)[0];
 };
 
 export const getCitiesKeysFromStorage = () => {
-  const stringified = localStorage.getItem(REMINDERS);
-  const reminders = stringified ? JSON.parse(stringified) : [];
+  const reminders = getParsedReminders();
 
   const keysCount = {};
   return reminders
