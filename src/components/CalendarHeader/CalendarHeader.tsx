@@ -18,9 +18,6 @@ const CalendarHeader = () => {
 
   return (
     <Container>
-      <Button color="black" onClick={() => dispatch(setToToday())}>
-        Today
-      </Button>
       <RoundedButton
         title="Previous month"
         onClick={() => dispatch(decreaseMonth())}
@@ -48,6 +45,9 @@ const CalendarHeader = () => {
       <RoundedButton title="Next year" onClick={() => dispatch(increaseYear())}>
         {">"}
       </RoundedButton>
+      <Button color="black" onClick={() => dispatch(setToToday())}>
+        Today
+      </Button>
     </Container>
   );
 };

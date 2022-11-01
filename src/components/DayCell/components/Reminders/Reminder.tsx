@@ -9,7 +9,7 @@ import {
 import { sliceYearMonthDay } from "../../../../utils/date";
 import { getForecastForReminder } from "../../../../utils/weather";
 import { IDisplayForecast } from "./interfaces";
-import { Date, Forecast, Name, ReminderContainer } from "./styles";
+import { Date, Forecast, Name, ReminderContainer, Title } from "./styles";
 
 export const Reminder = ({ reminder }: { reminder: IReminder }) => {
   const [forecast, setForecast] = useState<IDisplayForecast | null>(null);
@@ -44,11 +44,11 @@ export const Reminder = ({ reminder }: { reminder: IReminder }) => {
 
   return (
     <ReminderContainer onClick={handleContainerClick}>
-      <div>
+      <Title>
         <Date>{reminder.startTime}</Date>
         <span> </span>
         <Name>{reminder.reminderName}</Name>
-      </div>
+      </Title>
       {forecast ? <Forecast>{forecast.phrase}</Forecast> : null}
     </ReminderContainer>
   );

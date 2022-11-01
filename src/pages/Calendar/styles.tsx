@@ -8,15 +8,18 @@ export const Container = styled.div({
   height: "100vh",
 });
 
-export const CalendarGrid = styled.section<IContainerProps>((props) => ({
-  height: "90vh",
-  backgroundColor: "#cacaca",
+export const CalendarGrid = styled.section<IContainerProps>((props) => {
+  return {
+    height: `90vh`,
+    backgroundColor: "#cacaca",
+    margin: "0 auto",
 
-  flex: "1",
+    flex: "1",
 
-  display: "grid",
-  gridTemplateColumns: "repeat(7, 1fr)",
-  gridTemplateRows: `1fr repeat(${props.numRows}, 6fr)`,
+    display: "grid",
+    gridTemplateColumns: "repeat(7, 14vw)",
+    gridTemplateRows: `50px repeat(${props.numRows}, 1fr)`,
 
-  gridGap: "1px",
-}));
+    gridGap: "1px",
+  };
+});

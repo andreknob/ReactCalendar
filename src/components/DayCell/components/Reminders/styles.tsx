@@ -10,7 +10,7 @@ export const RemindersContainer = styled.div`
 export const ReminderContainer = styled.div`
   position: relative;
   cursor: pointer;
-  padding: 8px 8px 8px 24px;
+  padding: 4px 8px 4px 24px;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ export const ReminderContainer = styled.div`
     height: 10px;
     border-radius: 50%;
     position: absolute;
-    top: 13px;
+    top: 9px;
     left: 8px;
 
     animation: pulse 2s linear infinite;
@@ -33,8 +33,17 @@ export const ReminderContainer = styled.div`
   }
 `;
 
+export const Title = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export const Name = styled.span`
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Date = styled.span`

@@ -22,7 +22,7 @@ export const Reminders = ({ reminders }: { reminders: IReminder[] }) => {
 
   return (
     <RemindersContainer>
-      {reminders.map((reminder) => (
+      {reminders.slice(0, 4).map((reminder) => (
         <Reminder key={reminder.id} reminder={reminder} />
       ))}
     </RemindersContainer>
