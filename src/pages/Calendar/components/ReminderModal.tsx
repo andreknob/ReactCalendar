@@ -38,6 +38,7 @@ export const ReminderModal = () => {
 
   useEffect(() => {
     if (!editingId) {
+      setReminderName("");
       return;
     }
 
