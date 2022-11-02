@@ -17,7 +17,11 @@ const SearchCity = ({
   const timeoutRef = useRef<NodeJS.Timeout>(null);
 
   useEffect(() => {
-    if (!searchTerm || selected !== null) {
+    setSearchTerm(selected ? renderLocationName(selected) : "");
+  }, [selected]);
+
+  const handleSearch = (term: string) => {
+    if (!term || selected !== null) {
       return;
     }
 
@@ -27,17 +31,17 @@ const SearchCity = ({
 
     //@ts-ignore
     timeoutRef.current = setTimeout(async () => {
-      const results = await searchCity(searchTerm);
+      const results = await searchCity(term);
 
       setSearchResults(results);
     }, 200);
-  }, [searchTerm, selected]);
+  };
 
-  useEffect(() => {
-    if (selected) {
-      setSearchTerm(renderLocationName(selected));
-    }
-  }, [selected]);
+  const handleInputChange = (term: string) => {
+    setSearchTerm(term);
+
+    handleSearch(term);
+  };
 
   const renderLocationName = (item: ILocation) => {
     return `${item.cityName}, ${item.stateName}, ${item.countryName}`;
@@ -56,7 +60,7 @@ const SearchCity = ({
         placeholder="Search for a city"
         icon={<MdSearch />}
         value={searchTerm}
-        setValue={setSearchTerm}
+        setValue={handleInputChange}
       />
       <Results>
         {searchResults.map((item) => (

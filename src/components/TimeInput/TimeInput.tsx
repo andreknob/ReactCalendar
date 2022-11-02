@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { MdSchedule } from "react-icons/md";
+import { useSelector } from "react-redux";
 
+import { selectCalendar } from "../../store/slices/calendarSlice";
 import { hourFormatConversor24hTo12h } from "../../utils/date";
 import Input from "../Input";
 import { ITimeInputProps } from "./interfaces";
@@ -12,7 +14,14 @@ const TimeInput = ({
   onStartTimeChange,
   onEndTimeChange,
 }: ITimeInputProps) => {
+  const { reminderModal } = useSelector(selectCalendar);
+
   useEffect(() => {
+    if (!reminderModal.date || reminderModal.editingId) {
+      return;
+    }
+    console.log(reminderModal.date);
+
     const baseHour = (new Date().getHours() + 1) % 24;
     const convertedStartTimeHour = hourFormatConversor24hTo12h(baseHour);
     const convertedEndTimeHour = hourFormatConversor24hTo12h(
@@ -25,7 +34,7 @@ const TimeInput = ({
     onEndTimeChange(
       `${convertedEndTimeHour.hour}:00${convertedEndTimeHour.format}`
     );
-  }, [onStartTimeChange, onEndTimeChange]);
+  }, [onStartTimeChange, onEndTimeChange, reminderModal]);
 
   return (
     <>

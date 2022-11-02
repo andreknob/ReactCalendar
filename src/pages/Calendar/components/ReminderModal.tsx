@@ -39,7 +39,6 @@ export const ReminderModal = () => {
 
   useEffect(() => {
     if (!editingId) {
-      setReminderName("");
       return;
     }
 
@@ -118,16 +117,24 @@ export const ReminderModal = () => {
   };
 
   const finishAction = () => {
-    setReminderName("");
+    clearValues();
 
     dispatch(closeAllModals());
     dispatch(updateRemindersReference());
   };
 
+  const clearValues = () => {
+    setReminderName("");
+    setStartTime("");
+    setEndTime("");
+    setSelectedLocation(null);
+    setHasError(false);
+  };
+
   const title = editingId ? "Edit reminder" : "Add new reminder";
 
   return (
-    <Modal title={title} open={!!date || !!editingId}>
+    <Modal title={title} open={!!date || !!editingId} onClose={clearValues}>
       <Input
         name="reminder_name"
         placeholder="Add a title"
