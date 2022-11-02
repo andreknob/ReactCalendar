@@ -44,6 +44,31 @@ export const fetchForecasts = createAsyncThunk(
   }
 );
 
+const EXISTENT_FORECAST_REASON = "cityForecast already in store";
+
+export const fetchForecast = createAsyncThunk<
+  ICityForecast,
+  string,
+  {
+    state: {
+      calendar: TCalendarState;
+    };
+    rejectValue: string;
+  }
+>("Calendar/fetchForecast", async (cityKey, thunkApi) => {
+  const state = thunkApi.getState();
+
+  const cityForecast = state.calendar.citiesForecasts.find(
+    (item) => item.cityKey === cityKey
+  );
+
+  if (cityForecast) {
+    return thunkApi.rejectWithValue(EXISTENT_FORECAST_REASON);
+  }
+
+  return await getForecast(cityKey);
+});
+
 export const calendarSlice = createSlice({
   name: "Calendar",
   initialState,
@@ -114,6 +139,16 @@ export const calendarSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchForecasts.fulfilled, (state, action) => {
       state.citiesForecasts = action.payload;
+    });
+    builder.addCase(fetchForecast.fulfilled, (state, action) => {
+      state.citiesForecasts.push(action.payload);
+    });
+    builder.addCase(fetchForecast.rejected, (state, action) => {
+      if (action.payload === EXISTENT_FORECAST_REASON) {
+        return;
+      }
+
+      throw action.payload;
     });
   },
 });

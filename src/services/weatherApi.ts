@@ -3,12 +3,12 @@ import axios from "axios";
 const API_KEY = "oXB3MEV0WoaKj4XfIpMKLkfoXFScQO0d";
 
 const locationsInstance = axios.create({
-  baseURL: "http://dataservice.accuweather.com/locations/v1",
+  baseURL: "https://dataservice.accuweather.com/locations/v1",
   timeout: 2000,
 });
 
 const forecastsInstance = axios.create({
-  baseURL: "http://dataservice.accuweather.com/forecasts/v1",
+  baseURL: "https://dataservice.accuweather.com/forecasts/v1",
   timeout: 2000,
 });
 

@@ -17,6 +17,7 @@ import {
 import { ILocation } from "../../../services/weatherApi";
 import {
   closeAllModals,
+  fetchForecast,
   selectCalendar,
   updateRemindersReference,
 } from "../../../store/slices/calendarSlice";
@@ -104,6 +105,8 @@ export const ReminderModal = () => {
     };
 
     saveReminderToStorage(reminder);
+
+    dispatch(fetchForecast(reminder.location.cityKey));
 
     finishAction();
   };
