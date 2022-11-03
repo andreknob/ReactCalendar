@@ -21,7 +21,7 @@ const SearchCity = ({
   }, [selected]);
 
   const handleSearch = (term: string) => {
-    if (!term || selected !== null) {
+    if (!term) {
       return;
     }
 

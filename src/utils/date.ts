@@ -70,13 +70,13 @@ export const hourFormatConversor24hTo12h = (hour: number) => {
   if (hour < 12) {
     return {
       format: "am",
-      hour,
+      hour: hour === 0 ? 12 : hour,
     };
   }
 
   return {
     format: "pm",
-    hour: hour % 12,
+    hour: hour === 12 ? hour : hour % 12,
   };
 };
 

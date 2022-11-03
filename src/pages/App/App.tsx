@@ -1,9 +1,9 @@
-import Readme from "../../components/Readme";
+import { Link } from "react-router-dom";
 
 function App() {
   return (
     <div>
-      <Readme />
+      <Link to="/calendar">Go to Calendar page</Link>
     </div>
   );
 }
